@@ -1,0 +1,3 @@
+integer a = 5;
+integer b = 3;
+integer soma = a + b;
