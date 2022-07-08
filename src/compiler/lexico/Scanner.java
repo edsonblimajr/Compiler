@@ -55,12 +55,134 @@ public class Scanner {
 			}
 			else if (isOperator(currentChar)) {
                             term += currentChar;
-                            token = new Token();
-                            token.setType(Token.TK_OPERATOR);
-                            token.setText(term);
-                            token.setLine(line);
-                            token.setColumn(column - term.length());
-                            return token;
+                            if("<".equals(term)){
+                                token = new Token();
+                                token.setType(Token.LESSTHAN);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if(">".equals(term)){
+                                token = new Token();
+                                token.setType(Token.BIGGERTHAN);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if("<=".equals(term)){
+                                token = new Token();
+                                token.setType(Token.LESSOREQUAL);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if(">=".equals(term)){
+                                token = new Token();
+                                token.setType(Token.BIGGEROREQUAL);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if("<>".equals(term)){
+                                token = new Token();
+                                token.setType(Token.DIFFERENT);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if("//".equals(term)){
+                                token = new Token();
+                                token.setType(Token.DOUBLEBAR);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if(";".equals(term)){
+                                token = new Token();
+                                token.setType(Token.SEMICOLON);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if(":=".equals(term)){
+                                token = new Token();
+                                token.setType(Token.BECOMES);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if(",".equals(term)){
+                                token = new Token();
+                                token.setType(Token.COLON);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if("!".equals(term)){
+                                token = new Token();
+                                token.setType(Token.COMMENTS);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if("=".equals(term)){
+                                token = new Token();
+                                token.setType(Token.EQUALS);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if("+".equals(term)){
+                                token = new Token();
+                                token.setType(Token.PLUS);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if("-".equals(term)){
+                                token = new Token();
+                                token.setType(Token.MINUS);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if("*".equals(term)){
+                                token = new Token();
+                                token.setType(Token.TIMES);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if("/".equals(term)){
+                                token = new Token();
+                                token.setType(Token.DIVIDEDBY);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else{
+                                token = new Token();
+                                token.setType(Token.LEXICAL_ERROR);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
 			}
 			else {
                             throw new RuntimeException("Unrecognized SYMBOL");
@@ -69,19 +191,116 @@ public class Scanner {
                     case 1:
 			if (isChar(currentChar) || isDigit(currentChar)) {
                             estado = 1;
-                            term += currentChar;                            
-			}
+                            term += currentChar;                           
+			}                        
 			else if (isSpace(currentChar) || isOperator(currentChar) || isEOF(currentChar)){
                             if (!isEOF(currentChar)){
 				back();
                             }
-                            
-                            token = new Token();
-                            token.setType(Token.TK_IDENTIFIER);
-                            token.setText(term);
-                            token.setLine(line);
-                            token.setColumn(column - term.length());
+                            if ("program".equals(term)){
+                                token = new Token();
+                                token.setType(Token.PROGRAM);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if ("begin".equals(term)){
+                                token = new Token();
+                                token.setType(Token.BEGIN);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if ("true".equals(term)){
+                                token = new Token();
+                                token.setType(Token.TRUE);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if ("if".equals(term)){
+                                token = new Token();
+                                token.setType(Token.IF);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if ("then".equals(term)){
+                                token = new Token();
+                                token.setType(Token.THEN);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if ("else".equals(term)){
+                                token = new Token();
+                                token.setType(Token.ELSE);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if ("do".equals(term)){
+                                token = new Token();
+                                token.setType(Token.DO);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if ("false".equals(term)){
+                                token = new Token();
+                                token.setType(Token.FALSE);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if ("boolean".equals(term)){
+                                token = new Token();
+                                token.setType(Token.BOOLEAN);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if ("or".equals(term)){
+                                token = new Token();
+                                token.setType(Token.OR);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if ("and".equals(term)){
+                                token = new Token();
+                                token.setType(Token.AND);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else if ("while".equals(term)){
+                                token = new Token();
+                                token.setType(Token.WHILE);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
+                                return token;
+                            }
+                            else{
+                                token = new Token();
+                                token.setType(Token.IDENTIFIER);
+                                token.setText(term);
+                                token.setLine(line);
+                                token.setColumn(column - term.length());
                             return token;
+                            }
                             
                         }
                         else {
@@ -98,7 +317,7 @@ public class Scanner {
 				back();
                             }
                             token = new Token();
-                            token.setType(Token.TK_NUMBER);
+                            token.setType(Token.INTLITERAL);
                             token.setText(term);
                             token.setLine(line);
                             token.setColumn(column - term.length());
@@ -121,7 +340,7 @@ public class Scanner {
 	}
 	
 	private boolean isOperator(char c) {
-            return c == '>' || c == '<' || c == '=' || c == '!' || c == '+' || c == '-' || c == '*' || c == '/' || c == ';';
+            return c == '>' || c == '<' || c == '=' || c == '!' || c == '+' || c == '-' || c == '*' || c == '/' || c == ';' || c == ':' || c == ',';
 	}
 	private boolean isSpace(char c) {
             if (c == '\n' || c== '\r') {
