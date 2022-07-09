@@ -52,7 +52,7 @@ public class Scanner {
 			}
 			else if (isSpace(currentChar)) {
                             estado = 0; 
-                            if (currentChar == '\n' || currentChar == '\r') {
+                            if ((content[pos - 2] != '\r' && currentChar == '\n') || currentChar == '\r') {
                                 line++;
                                 column=1;
                             }                           
