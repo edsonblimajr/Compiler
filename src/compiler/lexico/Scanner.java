@@ -14,7 +14,7 @@ public class Scanner {
 	public Scanner(String filename) {
             try {
 		line = 1;
-		column = 0;
+		column = 1;
 		String txtConteudo;
 		txtConteudo = new String(Files.readAllBytes(Paths.get(filename)),StandardCharsets.UTF_8);
 		System.out.println("DEBUG --------");
@@ -39,7 +39,7 @@ public class Scanner {
             while (true) {
 		currentChar = nextChar();
 		column++;
-			
+                   			
 		switch(estado) {
                     case 0:
 			if (isChar(currentChar)) {
@@ -51,10 +51,14 @@ public class Scanner {
                             term += currentChar;
 			}
 			else if (isSpace(currentChar)) {
-                            estado = 0;
+                            estado = 0; 
+                            if (currentChar == '\n' || currentChar == '\r') {
+                                line++;
+                                column=0;
+                            }                           
 			}
-			else if (isOperator(currentChar)) {
-                            term += currentChar;
+			else if (isOperator(currentChar)) {                            
+                            term += currentChar;                            
                             if("<".equals(term)){
                                 token = new Token();
                                 token.setType(Token.LESSTHAN);
@@ -183,7 +187,7 @@ public class Scanner {
                                 token.setColumn(column - term.length());
                                 return token;
                             }
-			}
+			}                        
 			else {
                             throw new RuntimeException("Unrecognized SYMBOL");
 			}
@@ -193,10 +197,10 @@ public class Scanner {
                             estado = 1;
                             term += currentChar;                           
 			}                        
-			else if (isSpace(currentChar) || isOperator(currentChar) || isEOF(currentChar)){
-                            if (!isEOF(currentChar)){
-				back();
-                            }
+			else if (isSpace(currentChar) || isOperator(currentChar) || isEOF(currentChar)){                            
+                            if (!isEOF(currentChar)){				
+                                back();                                
+                            }                            
                             if ("program".equals(term)){
                                 token = new Token();
                                 token.setType(Token.PROGRAM);
@@ -292,8 +296,8 @@ public class Scanner {
                                 token.setLine(line);
                                 token.setColumn(column - term.length());
                                 return token;
-                            }
-                            else{
+                            }                            
+                            else{                                
                                 token = new Token();
                                 token.setType(Token.IDENTIFIER);
                                 token.setText(term);
@@ -312,10 +316,10 @@ public class Scanner {
                             estado = 2;
                             term += currentChar;
 			}
-			else if (!isChar(currentChar) || isEOF(currentChar)) {
-                            if (!isEOF(currentChar)){
-				back();
-                            }
+			else if (!isChar(currentChar) || isEOF(currentChar)) {                            
+                            if (!isEOF(currentChar)){				
+                                back();                                
+                            } 
                             token = new Token();
                             token.setType(Token.INTLITERAL);
                             token.setText(term);
@@ -343,10 +347,10 @@ public class Scanner {
             return c == '>' || c == '<' || c == '=' || c == '!' || c == '+' || c == '-' || c == '*' || c == '/' || c == ';' || c == ':' || c == ',';
 	}
 	private boolean isSpace(char c) {
-            if (c == '\n' || c== '\r') {
+            /*if (c == '\n' || c== '\r') {
             	line++;
             	column=0;
-            }
+            }*/
             return c == ' ' || c == '\t' || c == '\n' || c == '\r'; 
 	}
 	
