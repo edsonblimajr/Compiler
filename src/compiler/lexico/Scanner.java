@@ -54,7 +54,7 @@ public class Scanner {
                             estado = 0; 
                             if (currentChar == '\n' || currentChar == '\r') {
                                 line++;
-                                column=0;
+                                column=1;
                             }                           
 			}
 			else if (isOperator(currentChar)) {                            
