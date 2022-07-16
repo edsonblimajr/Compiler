@@ -5,3 +5,11 @@ if
 integer a = 5;
 integer b = 3;
 integer soma = a + b;
+1 <= 8;
+20 <> 51
+!Comentário 1
+if
+>=
+! Comentário 2
+alo := 10
+if :=
