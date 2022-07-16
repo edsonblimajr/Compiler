@@ -134,6 +134,6 @@ public class Token {
         
         @Override
 	public String toString() {                		
-                return "Token [type: " + type + " , text: " + text + " , line: " + line + " , column: " + column + "]";
+                return "Token [type: " + spellings[type] + " , text: " + text + " , line: " + line + " , column: " + column + "]";
         }
 }
