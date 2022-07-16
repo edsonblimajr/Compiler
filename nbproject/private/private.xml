@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/mateus/Downloads/Compiler/src/compiler/lexico/Scanner.java</file>
-            <file>file:/C:/Users/mateus/Downloads/Compiler/src/compiler/main/MainClass.java</file>
-            <file>file:/C:/Users/mateus/Downloads/Compiler/.gitignore</file>
-            <file>file:/C:/Users/mateus/Downloads/Compiler/teste.txt</file>
+            <file>file:/C:/Users/mateus/Documents/NetBeansProjects/CompiladorV2/teste.txt</file>
+            <file>file:/C:/Users/mateus/Documents/NetBeansProjects/CompiladorV2/src/compilador/lexico/Token.java</file>
+            <file>file:/C:/Users/mateus/Documents/NetBeansProjects/CompiladorV2/src/compilador/main/MainClass.java</file>
+            <file>file:/C:/Users/mateus/Documents/NetBeansProjects/CompiladorV2/src/compilador/lexico/Scanner.java</file>
         </group>
     </open-files>
 </project-private>
