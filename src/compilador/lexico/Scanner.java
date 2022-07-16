@@ -357,6 +357,7 @@ public class Scanner {
                 // Se comentário
                 case 9:
                     estado = 9;
+                    term = "";
                     if (isEndLine(currentChar)) {
                         estado = 10;
                         column = 0;
