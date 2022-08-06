@@ -1,8 +1,9 @@
-package compilador.lexico;
+package compiler.lexico;
 
 public class Token {
 
-    public final static byte IDENTIFIER = 0,
+    public final static byte 
+            IDENTIFIER = 0,
             INTLITERAL = 1,
             PROGRAM = 2,
             BEGIN = 3,
@@ -39,9 +40,15 @@ public class Token {
             ATSIGN = 34,//  falta
             COMMA = 35, //falta
             EOT = 36, // falta
+            VAR = 37,
+            END = 38,
+            LEFTBRACKET = 39,
+            RIGHTBRACKET = 40,
+            OF = 41,
+            FLOATLITERAL = 42, 
             LEXICAL_ERROR = -1;
 
-    private final static String[] spellings = {
+    public final static String[] spellings = {
         "IDENTIFICADOR",
         "INTEIRO",
         "PROGRAMA",
@@ -71,7 +78,7 @@ public class Token {
         "Barras Duplas",//26 
         "Ponto e Vírgula", // 27
         "ATRIBUIÇÃO",//28
-        "Vírgula",//29
+        "Dois Pontos",//29
         "Abre Parênteses",//30
         "Fecha Parênteses",//31
         "Comentário",//32
@@ -79,16 +86,22 @@ public class Token {
         "ATSIGN",
         "Vírgula",//35  Falta
         "<eot>",//36
+        "var",
+        "end",
+        "[",
+        "]",
+        "of",
+        "float"
         //":", // Falta
         //"#", // Falta
         //".", // Falta
         //"@", // Falta
     };
 
-    private byte type;
-    private String text;
-    private int line;
-    private int column;
+    public byte type;
+    public String text;
+    public int line;
+    public int column;
 
     public Token(byte type, String text, int line, int column) {
         super();
