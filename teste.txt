@@ -1,15 +1,17 @@
-integer x = 8;
-do
-while
-if
-integer a = 5;
-integer b = 3;
-integer soma = a + b;
-1 <= 8;
-20 <> 51
-!Comentário 1
-if
->=
-! Comentário 2
-alo := 10
-if :=
+program teste;
+    
+var a, b : integer;
+    
+var c : boolean;
+
+begin
+    
+  if (a > b) then
+        
+    c := true
+    
+  else
+        
+    c := false;
+
+end
