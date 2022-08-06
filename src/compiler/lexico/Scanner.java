@@ -1,10 +1,8 @@
-package compilador.lexico;
+package compiler.lexico;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
-import compilador.exceptions.LexicalException;
 
 public class Scanner {
 
@@ -61,7 +59,9 @@ public class Scanner {
                     } else if (isEndLine(currentChar)) {
                         estado = 10;
                     } else {
-                        throw new LexicalException("Unrecognized SYMBOL");
+                        token = new Token();
+                        token.setType(Token.LEXICAL_ERROR);
+                        return token;
                     }
                     break;
 
@@ -73,7 +73,12 @@ public class Scanner {
                     } else if (isSpace(currentChar) || isOperator(currentChar) || isEOF(currentChar) || isEndLine(currentChar) || IsGraphic(currentChar)) {
                         estado = 2;
                     } else {
-                        throw new LexicalException("Malformed Identifier");
+                        token = new Token();
+                        token.setType(Token.LEXICAL_ERROR);
+                        token.setText(term);
+                        token.setLine(line);
+                        token.setColumn(column - term.length());
+                        return token;
                     }
                     break;
 
@@ -168,6 +173,27 @@ public class Scanner {
                             token.setLine(line);
                             token.setColumn(column - term.length());
                             return token;
+                        case "var":
+                            token = new Token();
+                            token.setType(Token.VAR);
+                            token.setText(term);
+                            token.setLine(line);
+                            token.setColumn(column - term.length());
+                            return token;
+                        case "end":
+                            token = new Token();
+                            token.setType(Token.END);
+                            token.setText(term);
+                            token.setLine(line);
+                            token.setColumn(column - term.length());
+                            return token;
+                        case "of":
+                            token = new Token();
+                            token.setType(Token.OF);
+                            token.setText(term);
+                            token.setLine(line);
+                            token.setColumn(column - term.length());
+                            return token;    
                         default:
                             token = new Token();
                             token.setType(Token.IDENTIFIER);
@@ -185,7 +211,12 @@ public class Scanner {
                     } else if (isSpace(currentChar) || isChar(currentChar) || isOperator(currentChar) || isEOF(currentChar) || isEndLine(currentChar) || IsGraphic(currentChar)) {
                         estado = 4;
                     } else {
-                        throw new LexicalException("Malformed Identifier");
+                        token = new Token();
+                        token.setType(Token.LEXICAL_ERROR);
+                        token.setText(term);
+                        token.setLine(line);
+                        token.setColumn(column - term.length());
+                        return token;
                     }
                     break;
 
@@ -210,7 +241,12 @@ public class Scanner {
                     } else if (isSpace(currentChar) || isChar(currentChar) || isEOF(currentChar) || isEndLine(currentChar) || IsGraphic(currentChar)) {
                         estado = 6;
                     } else {
-                        throw new LexicalException("Malformed Identifier");
+                        token = new Token();
+                        token.setType(Token.LEXICAL_ERROR);
+                        token.setText(term);
+                        token.setLine(line);
+                        token.setColumn(column - term.length());
+                        return token;
                     }
                     break;
 
@@ -322,7 +358,7 @@ public class Scanner {
                         case "!":
                             estado = 9;
                             break;
-                        case ",":
+                        case ":":
                             if (!isEOF(currentChar)) {
                                 back();
                             }
@@ -342,6 +378,56 @@ public class Scanner {
                             token.setLine(line);
                             token.setColumn(column - term.length());
                             return token;
+                        case ",":
+                            if (!isEOF(currentChar)) {
+                                back();
+                            }
+                            token = new Token();
+                            token.setType(Token.COMMA);
+                            token.setText(term);
+                            token.setLine(line);
+                            token.setColumn(column - term.length());
+                            return token;
+                        case "(":
+                            if (!isEOF(currentChar)) {
+                                back();
+                            }
+                            token = new Token();
+                            token.setType(Token.LPAREN);
+                            token.setText(term);
+                            token.setLine(line);
+                            token.setColumn(column - term.length());
+                            return token;
+                        case ")":
+                            if (!isEOF(currentChar)) {
+                                back();
+                            }
+                            token = new Token();
+                            token.setType(Token.RPAREN);
+                            token.setText(term);
+                            token.setLine(line);
+                            token.setColumn(column - term.length());
+                            return token;
+                        case "[":
+                            if (!isEOF(currentChar)) {
+                                back();
+                            }
+                            token = new Token();
+                            token.setType(Token.LEFTBRACKET);
+                            token.setText(term);
+                            token.setLine(line);
+                            token.setColumn(column - term.length());
+                            return token;
+                        case "]":
+                            if (!isEOF(currentChar)) {
+                                back();
+                            }
+                            token = new Token();
+                            token.setType(Token.RIGHTBRACKET);
+                            token.setText(term);
+                            token.setLine(line);
+                            token.setColumn(column - term.length());
+                            return token;    
                         default:
                             if (!isEOF(currentChar)) {
                                 back();
@@ -393,7 +479,7 @@ public class Scanner {
     }
 
     private boolean IsGraphic(char c) {
-        return c == ';' || c == ':' || c == ',' || c == '!';
+        return c == ';' || c == ':' || c == ',' || c == '!' || c == '(' || c == ')' || c == '[' || c == ']';
     }
 
     private boolean isSpace(char c) {
@@ -404,7 +490,7 @@ public class Scanner {
         return c == '\n' || c == '\r';
     }
 
-    private char nextChar() {
+    public char nextChar() {
         if (isEOF()) {
             return '\0';
         }
